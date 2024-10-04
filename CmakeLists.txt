@@ -4,8 +4,18 @@ project(OpenGL VERSION 0.3)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-include_directories("D:/Applications/VCPKG/vcpkg/installed/x64-windows/include")
-link_directories("D:/Applications/VCPKG/vcpkg/installed/x64-windows/lib")
+# Get the VCPKG path from the VCPKG_LOCATION environment variable
+set(VCPKG_LOCATION $ENV{VCPKG_LOCATION})
+
+# Check if the VCPKG_LOCATION is defined
+if(NOT VCPKG_LOCATION)
+    message(FATAL_ERROR "VCPKG_LOCATION environment variable is not set.")
+endif()
+
+# Use the VCPKG path for include and link directories
+include_directories("${VCPKG_LOCATION}/installed/x64-windows/include")
+link_directories("${VCPKG_LOCATION}/installed/x64-windows/lib")
+
 
 file(GLOB_RECURSE SOURCES src/*.c src/*.cpp src/*.h)
 
