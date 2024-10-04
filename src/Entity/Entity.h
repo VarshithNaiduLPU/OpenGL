@@ -6,10 +6,10 @@ class Entity
 {
 private:
     unsigned int VAO, VBO;
-    GLfloat mesh[];
 public:
     Entity();
     ~Entity();
 
+    void mesh(std::vector<GLfloat> vertices);
     void Draw();
 };

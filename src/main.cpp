@@ -4,7 +4,9 @@ int main()
 {
     App app;
 
-    app.CreateGLFWWindow(800, 600, "🌃");
+    app.CreateGLFWWindow(800, 600, "🔺");
+
+
     app.ProcessInput(GLFW_KEY_ESCAPE, [&](){
         Logger::msg("Window closed");
         app.CloseWindow();
@@ -16,7 +18,7 @@ int main()
 
     app.ProcessInputKD(GLFW_KEY_P, [&](){
         app.SetWindowTitle("Polygon Mode : POINT");
-        app.SetPointSize(10.0f);
+        app.SetPointSize(5.0f);
         app.SetPolygonMode(app.POINT_MODE);
     }, {GLFW_KEY_LEFT_CONTROL});
 
@@ -41,8 +43,6 @@ int main()
         Logger::msg("W2");
     });
 
-
-
     app.BackgroundColor = vec3(0.1f, 0.1f, 0.1f);
 
     app.AddShader("./Shaders/vertex.glsl", GL_VERTEX_SHADER);
@@ -50,30 +50,27 @@ int main()
     app.LinkProgram();
 
 
-    std::vector<GLfloat> vertices = {
+    std::vector<GLfloat> vertices1 = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
+         0.0f,  0.0f, 0.0f
+    };
+
+    std::vector<GLfloat> vertices2 = {
+        -0.5f,  0.0f, 0.0f,
+         0.5f,  0.0f, 0.0f,
          0.0f,  0.5f, 0.0f
     };
 
-    unsigned int VAO, VBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
+    Entity entity1;
+    entity1.mesh(vertices1);
 
-    glBindVertexArray(VAO);
+    app.AddEntity(entity1);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+    Entity entity2;
+    entity2.mesh(vertices2);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
-
-
-    app.tempVAO(VAO);
-
+    app.AddEntity(entity2);
 
     app.Run();
 

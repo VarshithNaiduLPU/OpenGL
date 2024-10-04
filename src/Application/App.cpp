@@ -91,8 +91,7 @@ void App::Run()
 
         glUseProgram(shader_program);
 
-        glBindVertexArray(temp_vao);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        all_entities();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -240,7 +239,15 @@ void App::LinkProgram()
     glDeleteShader(fragment_shader);
 }
 
-void App::tempVAO(unsigned int VAO)
+void App::AddEntity(Entity entity)
 {
-    temp_vao = VAO;
+    entities.push_back(entity);
+}
+
+void App::all_entities()
+{
+    for(auto &entity : entities)
+    {
+        entity.Draw();
+    }
 }

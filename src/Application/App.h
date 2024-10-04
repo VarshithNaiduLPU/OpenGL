@@ -9,13 +9,13 @@ private:
 
     unsigned int shader_program = NULL, vertex_shader = NULL, fragment_shader = NULL;
 
-    unsigned int temp_vao = NULL;
-
     std::unordered_map<unsigned int, std::vector<std::pair<std::function<void()>, bool>>> keys;
     std::unordered_map<unsigned int, std::vector<std::function<void()>>> kdKeys;
+    std::vector<Entity> entities;
 
     void glfw_init();
     void all_inputs();
+    void all_entities();
     void viewport_size();
 
     void make_program();
@@ -51,5 +51,5 @@ public:
     void AddShader(const std::string shaderLocation, GLenum shaderType);
     void LinkProgram();
 
-    void tempVAO(unsigned int VAO);
+    void AddEntity(Entity entity);
 };
