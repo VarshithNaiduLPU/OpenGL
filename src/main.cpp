@@ -49,17 +49,16 @@ int main()
     app.AddShader("./Shaders/fragment.glsl", GL_FRAGMENT_SHADER);
     app.LinkProgram();
 
-
     std::vector<GLfloat> vertices1 = {
-        -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-         0.0f,  0.0f, 0.0f
+         0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f,    0.0f, 1.0f, 0.0f,
+        -0.5f,  0.5f, 0.0f,    0.0f, 0.0f, 1.0f
     };
 
     std::vector<GLfloat> vertices2 = {
-        -0.5f,  0.0f, 0.0f,
-         0.5f,  0.0f, 0.0f,
-         0.0f,  0.5f, 0.0f
+         0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 0.0f,
+         0.5f,  0.5f, 0.0f,    1.0f, 1.0f, 1.0f,
+        -0.5f,  0.5f, 0.0f,    0.0f, 0.0f, 1.0f
     };
 
     Entity entity1;
